@@ -10,16 +10,12 @@ ENV CONTAINER_USER=${ARG_CONTAINER_USER}
 # Basic commands for ubuntu images
 RUN apt-get update && \
 apt-get install -y --no-install-recommends \
-curl ca-certificates apt-transport-https gnupg lsb-release tzdata
+curl ca-certificates apt-transport-https gnupg lsb-release tzdata python3 python3-pip
 
 # TimeZone Configuration
 RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime && \
 echo $TZ /etc/timezone && \
 dpkg-reconfigure --frontend noninteractive tzdata
-
-# Setup python3 and dependencies
-RUN apt-get install -y \
-python3 python3-pip
 
 # Setup container user
 RUN apt-get install -y sudo && \
